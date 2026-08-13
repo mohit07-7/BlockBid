@@ -148,7 +148,8 @@ The main contract never trusts an external service to issue refunds — the escr
 
 
 ### Mobile Responsive View
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/900a3237-fda8-4770-8f7b-9194e7522a0d" />
+<img width="1914" height="917" alt="image" src="https://github.com/user-attachments/assets/f9cf8786-91b6-401a-9521-40775f5166ce" />
+
 
 
 *The application is fully responsive and supports secure, trustless bidding across all devices.*
