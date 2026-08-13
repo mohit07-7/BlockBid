@@ -1,6 +1,5 @@
-/* ── New: Clash Display (headlines) + JetBrains Mono (tags/labels) — professional web3 pairing ── */
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap');
+/* ── Signature typography: Space Grotesk (display) + JetBrains Mono (ledger data) ── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,8 +15,7 @@
   }
 
   body {
-    @apply bg-background text-on-surface font-sans antialiased
-           dark:bg-black dark:text-slate-100;
+    @apply bg-background text-on-surface font-sans antialiased;
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -25,25 +23,24 @@
 
 @layer components {
 
-  /* ── Primary CTA — solid crimson, no neon overload ────────────────────── */
+  /* ── Primary CTA — electric cyan "signal" button ─────────────────────── */
   .btn-primary {
-    @apply inline-flex items-center gap-2 rounded-lg
+    @apply inline-flex items-center gap-2 rounded-full
            bg-secondary-container text-on-secondary
-           px-6 py-3 text-label-lg font-semibold
+           px-6 py-3 text-label-lg font-bold uppercase tracking-wide
            transition-all duration-200 shadow-neon
-           hover:brightness-110 hover:shadow-neon-lg hover:-translate-y-0.5 active:scale-[0.98]
-           disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:translate-y-0;
+           hover:brightness-105 hover:shadow-neon-lg hover:-translate-y-0.5 active:scale-95
+           disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none disabled:translate-y-0;
   }
 
   /* ── Ghost / outline button ────────────────────────────────────────── */
   .btn-ghost {
-    @apply inline-flex items-center gap-2 rounded-lg
-           border border-outline-variant bg-surface-container-lowest
-           px-4 py-3 text-body-sm font-medium text-on-surface
+    @apply inline-flex items-center gap-2 rounded-full
+           border border-outline bg-surface-container-lowest
+           px-4 py-3 text-body-sm font-semibold text-on-surface
            transition-all duration-200
-           hover:bg-surface-container hover:border-secondary-container/50
-           disabled:cursor-not-allowed disabled:opacity-50
-           dark:bg-black dark:border-slate-800 dark:text-slate-300 dark:hover:border-secondary-container/50;
+           hover:bg-surface-container hover:border-secondary-container hover:text-secondary-container
+           disabled:cursor-not-allowed disabled:opacity-40;
   }
 
   /* ── Stable height helper ──────────────────────────────────────────── */
@@ -58,37 +55,33 @@
   }
 
   .metric p {
-    @apply text-headline-lg font-display font-semibold text-on-background;
+    @apply text-headline-lg font-black text-secondary-container font-mono;
   }
 
   .metric span {
-    @apply mt-1 block font-mono text-label-sm font-medium text-on-surface-variant uppercase tracking-widest;
+    @apply mt-1 block text-label-lg font-semibold text-on-primary-container uppercase tracking-wider;
   }
 
-  /* ── Auction status badge ──────────────────────────────────────────── */
+  /* ── Auction status badge — ledger-tag styling ───────────────────────── */
   .status-badge {
-    @apply inline-flex items-center gap-1.5 rounded-md px-2.5 py-1
-           font-mono text-label-sm font-semibold uppercase tracking-wide;
+    @apply inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 font-mono
+           text-label-sm font-bold uppercase tracking-wide;
   }
 
   .status-badge.live {
-    @apply bg-auction-live/10 text-auction-live border border-auction-live/30
-           dark:bg-auction-live/15 dark:text-auction-live dark:border-auction-live/40;
+    @apply bg-auction-live/10 text-auction-live border border-auction-live/40;
   }
 
   .status-badge.ended {
-    @apply bg-on-surface/10 text-on-surface-variant border border-outline-variant
-           dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700;
+    @apply bg-white/5 text-on-surface-variant border border-outline;
   }
 
   .status-badge.settled {
-    @apply bg-success-green/10 text-success-green border border-success-green/30
-           dark:bg-success-green/15 dark:text-success-green dark:border-success-green/45;
+    @apply bg-success-green/10 text-success-green border border-success-green/40;
   }
 
   .status-badge.preview {
-    @apply bg-auction-upcoming/10 text-auction-upcoming border border-auction-upcoming/30
-           dark:bg-auction-upcoming/15 dark:text-auction-upcoming dark:border-auction-upcoming/40;
+    @apply bg-auction-upcoming/10 text-auction-upcoming border border-auction-upcoming/40;
   }
 
   /* ── Legacy dot (used in some older components) ────────────────────── */
@@ -96,48 +89,44 @@
     @apply h-2.5 w-2.5 rounded-full flex-shrink-0;
   }
 
-  .status-dot.live    { @apply bg-auction-live shadow-[0_0_8px_rgba(225,18,42,0.6)]; }
+  .status-dot.live    { @apply bg-auction-live shadow-[0_0_10px_rgba(255,46,209,0.8)]; }
   .status-dot.ended   { @apply bg-outline; }
-  .status-dot.settled { @apply bg-success-green; }
+  .status-dot.settled { @apply bg-success-green shadow-[0_0_10px_rgba(57,255,136,0.7)]; }
 
   /* ── Auction card hover effect ─────────────────────────────────────── */
   .auction-card-hover {
-    @apply transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 hover:border-secondary-container/50;
   }
 
   /* ── Glass (legacy, keep for compatibility) ────────────────────────── */
   .glass {
-    @apply rounded-xl border border-outline-variant bg-surface-container-lowest/80 backdrop-blur-sm
-           dark:bg-black/80 dark:border-slate-800;
+    @apply rounded-lg border border-outline-variant bg-surface-container-lowest/80 backdrop-blur-sm;
   }
 
-  /* ── New: glass panel used across the redesigned shell ───────────────── */
+  /* ── Glass panel used across the shell ───────────────────────────────── */
   .glass-panel {
-    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl;
+    @apply rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-xl;
   }
 
-  /* ── New: pill badge with dot — mono font, technical feel ──────────────── */
+  /* ── Pill badge with dot ──────────────────────────────────────────────── */
   .pill-badge {
-    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full
-           font-mono text-label-sm uppercase tracking-wider font-semibold
-           border border-secondary-container/25 bg-secondary-container/[0.06] text-secondary-container;
+    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-mono
+           text-label-sm uppercase tracking-wider font-bold
+           border border-secondary-container/30 bg-secondary-container/[0.06] text-secondary-container;
   }
 
-  /* ── New: display headline — sharp geometric sans, tight tracking, no shouting ─────── */
+  /* ── Display headline treatment — sharp terminal-grotesk, not italic ──── */
   .headline-italic {
-    @apply font-display font-semibold tracking-tight;
+    @apply font-display font-semibold;
     font-style: normal;
+    letter-spacing: -0.02em;
   }
 
-  /* ── New: floating glass chip — small drifting labels scattered around hero/sections ── */
+  /* ── Floating glass chip — small drifting ledger labels ───────────────── */
   .float-chip {
     @apply pointer-events-none select-none absolute flex items-center gap-1.5
-           rounded-lg border border-white/10 bg-white/[0.05] backdrop-blur-md
-           px-3 py-1.5 font-mono text-label-sm font-semibold text-on-primary shadow-chip;
-  }
-
-  .dark .float-chip {
-    @apply bg-black/60 border-slate-700/60;
+           rounded-lg border border-secondary-container/20 bg-primary/70 backdrop-blur-md
+           px-3 py-1.5 text-label-sm font-mono font-bold text-secondary-container shadow-chip;
   }
 }
 
@@ -159,7 +148,7 @@
 
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(1deg); }
+  50% { transform: translateY(-10px) rotate(1.5deg); }
 }
 
 @keyframes float-slow {
@@ -168,12 +157,8 @@
 }
 
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 10px rgba(225, 18, 42, 0.15); }
-  50% { box-shadow: 0 0 28px rgba(225, 18, 42, 0.3); }
-}
-
-@keyframes border-spin {
-  to { --border-angle: 360deg; }
+  0%, 100% { box-shadow: 0 0 14px rgba(0, 240, 255, 0.18); }
+  50% { box-shadow: 0 0 40px rgba(0, 240, 255, 0.4); }
 }
 
 .animate-fade-in {
@@ -185,7 +170,7 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent 33%, rgba(225,18,42,0.10) 50%, transparent 66%);
+  background: linear-gradient(90deg, transparent 33%, rgba(0,240,255,0.14) 50%, transparent 66%);
   background-size: 200% 100%;
   animation: shimmer 2.5s ease-in-out infinite;
 }
@@ -202,35 +187,38 @@
   animation: glow-pulse 2.4s ease-in-out infinite;
 }
 
-/* ── Restrained accent text — solid crimson, not a rainbow gradient ───────── */
+/* ── Gradient text — cyan → magenta signal sweep ───────────────────────── */
 .gradient-text {
-  background: linear-gradient(100deg, #FF4D5E 0%, #E1122A 60%, #8A0A1A 100%);
+  background: linear-gradient(100deg, #00F0FF 0%, #4EF5FF 35%, #FF2ED1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ── Hero section background: faint dot-grid, barely visible ──────────── */
+/* ── Hero background: fine circuit dot-grid ────────────────────────────── */
 .hero-grid-bg {
   background-image:
-    radial-gradient(rgba(225,18,42,0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(rgba(0,240,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,240,255,0.07) 1px, transparent 1px);
+  background-size: 42px 42px;
+  background-position: center top;
 }
 
 .dark .hero-grid-bg {
   background-image:
-    radial-gradient(rgba(225,18,42,0.10) 1px, transparent 1px);
+    linear-gradient(rgba(0,240,255,0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,240,255,0.09) 1px, transparent 1px);
 }
 
-/* ── New: mesh gradient backdrop — mostly black, red used as a whisper ─────────────────────────── */
+/* ── Mesh gradient backdrop for the shell — void with signal bloom ────────── */
 .mesh-bg {
   background:
-    radial-gradient(ellipse 55% 45% at 15% 5%, rgba(225,18,42,0.10), transparent 60%),
-    radial-gradient(ellipse 45% 35% at 90% 15%, rgba(91,140,255,0.06), transparent 60%),
-    radial-gradient(ellipse 55% 45% at 50% 100%, rgba(225,18,42,0.06), transparent 60%);
+    radial-gradient(ellipse 55% 45% at 12% 8%, rgba(0,240,255,0.14), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 92% 15%, rgba(255,46,209,0.12), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 105%, rgba(0,240,255,0.08), transparent 60%);
 }
 
-/* ── New: subtle rotating conic-gradient border for the manager console ── */
+/* ── Rotating conic-gradient border for the manager console ───────────────── */
 .neon-border {
   position: relative;
 }
@@ -241,10 +229,82 @@
   inset: -1.5px;
   border-radius: inherit;
   padding: 1.5px;
-  background: conic-gradient(from 0deg, #E1122A, #2B0006, #5B8CFF, #E1122A);
+  background: conic-gradient(from 0deg, #00F0FF, #FF2ED1, #39FF88, #00F0FF);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: 0.4;
+  opacity: 0.6;
   pointer-events: none;
+}
+
+/* ══ SIGNATURE ELEMENT: circuit-line network — animated pathways with traveling light pulses ══ */
+.circuit-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.circuit-lines path {
+  fill: none;
+  stroke: url(#circuit-gradient);
+  stroke-width: 1;
+  opacity: 0.35;
+}
+
+.circuit-lines .pulse-dot {
+  fill: #00F0FF;
+  filter: drop-shadow(0 0 4px #00F0FF);
+}
+
+/* ── Scanline sweep — a single light band drifting down glass surfaces ────── */
+.scan-sweep {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.scan-sweep::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, rgba(0,240,255,0.10), transparent);
+  animation: scan 5s linear infinite;
+}
+
+/* ── Ambient noise/scanline texture over the whole viewport ───────────────── */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.012) 0px,
+    rgba(255,255,255,0.012) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* ── Hairline ledger divider with tick marks ───────────────────────────────── */
+.ledger-rule {
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(0,240,255,0.35) 0px,
+    rgba(0,240,255,0.35) 4px,
+    transparent 4px,
+    transparent 10px
+  );
+}
+
+.animate-flicker {
+  animation: flicker 6s ease-in-out infinite;
 }
