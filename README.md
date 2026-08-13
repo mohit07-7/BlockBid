@@ -1,11 +1,11 @@
 <div align="center">
 
-#  BidX
+#  BlockBid
 ### Decentralized On-Chain Project Bidding & Auction Platform
 
 **Built on Stellar / Soroban** — trustless XLM-backed bidding with instant escrow refunds and automatic settlement.
 
-[![CI/CD Status](https://github.com/pushpa-p7/BidX/actions/workflows/ci.yml/badge.svg)](https://github.com/pushpa-p7/BidX/actions/workflows/ci.yml)
+[![CI/CD Status](https://github.com/mohit07-7/BlockBid/actions/workflows/ci.yml/badge.svg)](https://github.com/mohit07-7/BlockBid/actions/workflows/ci.yml)
 ![React](https://img.shields.io/badge/React-TypeScript-61DAFB?logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-Build_Tool-646CFF?logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?logo=tailwindcss&logoColor=white)
@@ -51,9 +51,9 @@ https://stellar.expert/explorer/testnet/contract/CDKJLCZDSBITX2LSBEKQNAW45MQEWAG
 
 ## 🧬 Overview
 
-**BidX** is a decentralized, on-chain project bidding and auction platform built on the **Stellar/Soroban** blockchain. Project managers list opportunities directly to the chain, and public bidders submit trustless XLM-backed bids in real time — no intermediary ever holds the funds.
+**BlockBid** is a decentralized, on-chain project bidding and auction platform built on the **Stellar/Soroban** blockchain. Project managers list opportunities directly to the chain, and public bidders submit trustless XLM-backed bids in real time — no intermediary ever holds the funds.
 
-At its core, BidX solves a real trust problem in traditional bidding: sellers can't quietly favor a bidder, and bidders can't be left waiting on a manual refund after being outbid. The Soroban contract escrows every active bid, refunds the previous bidder synchronously the moment a higher bid lands, and settles the winning bid to the seller automatically once the auction closes — all verifiable on-chain.
+At its core, BlockBid solves a real trust problem in traditional bidding: sellers can't quietly favor a bidder, and bidders can't be left waiting on a manual refund after being outbid. The Soroban contract escrows every active bid, refunds the previous bidder synchronously the moment a higher bid lands, and settles the winning bid to the seller automatically once the auction closes — all verifiable on-chain.
 
 ---
 
@@ -63,13 +63,13 @@ At its core, BidX solves a real trust problem in traditional bidding: sellers ca
 |---|---|
 | 🚀 Live App | [onchain-auction.vercel.app](https://onchain-auction.vercel.app/) |
 | 🎥 Demo Video | [Watch on Google Drive](https://drive.google.com/file/d/14AbMnbf_OQNQ7jH9q6hOr0vyzt52T1pG/view?usp=sharing) |
-| ⚙️ CI Pipeline | [GitHub Actions](https://github.com/pushpa-p7/BidX/actions) |
+| ⚙️ CI Pipeline | [GitHub Actions](https://github.com/mohit07-7/BlockBid/actions) |
 
 ---
 
 ## 🏗️ Architecture
 
-BidX is split into three cooperating layers: a **React/Vite frontend** that managers and bidders interact with, a **multi-wallet signing layer**, and an **on-chain Soroban layer** that governs auction state, escrow, and settlement.
+BlockBid is split into three cooperating layers: a **React/Vite frontend** that managers and bidders interact with, a **multi-wallet signing layer**, and an **on-chain Soroban layer** that governs auction state, escrow, and settlement.
 
 ```mermaid
 graph TB
@@ -153,7 +153,7 @@ The main contract never trusts an external service to issue refunds — the escr
 
 ## ✅ CI/CD Pipeline Status
 
-[![CI/CD Status](https://github.com/pushpa-p7/BidX/actions/workflows/ci.yml/badge.svg)](https://github.com/pushpa-p7/BidX/actions/workflows/ci.yml)
+[![CI/CD Status](https://github.com/mohit07-7/BlockBid/actions/workflows/ci.yml/badge.svg)](https://github.com/mohit07-7/BlockBid/actions/workflows/ci.yml)
 
 **Pipeline runs:**
 - ✅ Node dependency installation
@@ -256,8 +256,8 @@ Inspect verified on-chain transactions and call history on the Stellar Developme
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/pushpa-p7/BidX.git
-   cd BidX
+   git clone https://github.com/mohit07-7/BlockBid.git
+   cd BlockBid
    ```
 
 2. **Install dependencies:**
@@ -364,7 +364,7 @@ cargo test -p auction-contract
 
 Real testnet users interacted directly with the deployed Soroban contract, and their structured feedback drove nine completed development iterations — covering theme accessibility, multi-wallet support, mobile responsiveness, auto-refunding safety, mainnet readiness, board search/filtering, live analytics, countdown urgency, and escrowed bidding with anti-snipe protection.
 
-- **📜 Full Iteration Log:** [View Git Commit History](https://github.com/pushpa-p7/BidX/commits/main)
+- **📜 Full Iteration Log:** [View Git Commit History](https://github.com/mohit07-7/BlockBid/commits/main)
 
 ---
 
