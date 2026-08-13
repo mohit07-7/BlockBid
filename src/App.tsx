@@ -71,21 +71,6 @@ const trustPoints = [
   },
 ];
 
-// ── New: floating glass chips — small drifting labels scattered across the hero.
-// Each has its own drift animation + delay so the field feels organic, not mechanical.
-const heroFloatChips: {
-  label: string;
-  icon: typeof Sparkles;
-  className: string;
-  anim: 'animate-drift-a' | 'animate-drift-b' | 'animate-drift-c';
-  delay?: string;
-}[] = [
-  { label: 'LIVE · 3 bids', icon: Zap, className: 'top-[6%] right-[6%]', anim: 'animate-drift-a' },
-  { label: '10 XLM start', icon: Sparkles, className: 'top-[46%] right-[-2%]', anim: 'animate-drift-b', delay: '1.2s' },
-  { label: 'Settled on-chain', icon: ShieldCheck, className: 'bottom-[10%] left-[2%]', anim: 'animate-drift-c', delay: '0.6s' },
-  { label: '128 bidders', icon: Users, className: 'top-[2%] left-[38%]', anim: 'animate-drift-b', delay: '2s' },
-];
-
 function App() {
   const { wallet, connect, disconnect } = useWallet();
   const { isDark, toggle } = useTheme();
@@ -141,14 +126,12 @@ function App() {
     localStorage.setItem('stellarNetwork', selectedNetwork);
   }, [selectedNetwork]);
 
-  // Auto-dismiss success toast after 4 seconds
   useEffect(() => {
     if (!success) return;
     const t = setTimeout(() => setSuccess(null), 4000);
     return () => clearTimeout(t);
   }, [success]);
 
-  // Auto-navigate to dashboard when wallet connects
   useEffect(() => {
     if (wallet.isConnected && wallet.address) {
       setActiveSection('dashboard');
@@ -162,6 +145,18 @@ function App() {
     const totalBids = auctions.filter((auction) => auction.highestBid !== '0').length;
     return { live, totalBids, total: auctions.length };
   }, [auctions]);
+
+  // ── Ticker-rail content — the "auction clerk's tape" signature element ──
+  const tickerItems = useMemo(
+    () => [
+      { icon: Zap, label: `${stats.live} lot${stats.live === 1 ? '' : 's'} live now` },
+      { icon: Sparkles, label: 'starting bids from 10 XLM' },
+      { icon: ShieldCheck, label: 'settled on-chain · no admin keys' },
+      { icon: Users, label: '128 bidders and counting' },
+      { icon: Globe2, label: `${networkConfig.label} · permissionless` },
+    ],
+    [stats.live, networkConfig.label]
+  );
 
   const hasActiveFilters = searchQuery !== '' || statusFilter !== 'all' || showWatchedOnly;
 
@@ -305,11 +300,11 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-sans dark:bg-[#05030D] dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen bg-background text-on-surface font-sans dark:bg-[#0B0906] dark:text-stone-100 transition-colors duration-300">
 
       {/* ══ FLOATING GLASS HEADER ══ */}
       <div className="sticky top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
-        <header className="mx-auto max-w-container-max rounded-2xl border border-white/10 bg-primary/90 backdrop-blur-xl shadow-lg shadow-black/20 dark:bg-slate-950/90 dark:border-slate-800/60">
+        <header className="mx-auto max-w-container-max rounded-2xl border border-white/10 bg-primary/90 backdrop-blur-xl shadow-lg shadow-black/20 dark:bg-stone-950/90 dark:border-stone-800/60">
           <div className="flex items-center justify-between px-4 sm:px-6 py-3">
 
             {/* Logo + Nav */}
@@ -409,27 +404,26 @@ function App() {
         </header>
       </div>
 
+      {/* ══ TICKER RAIL — signature scrolling "auction clerk's tape" ══ */}
+      <div className="ticker-rail">
+        <div className="ticker-track animate-ticker">
+          {[...tickerItems, ...tickerItems].map((item, i) => (
+            <span key={i} className="ticker-item">
+              <item.icon size={13} className="text-secondary-container shrink-0" />
+              {item.label}
+              <span className="ticker-dot pl-8">·</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
       <main>
-        {/* ══ HERO — mesh gradient backdrop, asymmetric layout, floating chip field ══ */}
-        <section className="relative overflow-hidden mesh-bg hero-grid-bg border-b border-outline-variant dark:border-slate-800/80">
-          {/* Floating glow orbs */}
+        {/* ══ HERO — mesh gradient backdrop, asymmetric layout ══ */}
+        <section className="relative overflow-hidden mesh-bg hero-grid-bg border-b border-outline-variant dark:border-stone-800/80">
+          {/* Floating glow orbs — ambient only, no motion clutter */}
           <div className="absolute top-10 -left-24 w-96 h-96 bg-secondary-container/10 blur-[120px] rounded-full pointer-events-none animate-float-slow" />
           <div className="absolute -bottom-32 right-0 w-[28rem] h-[28rem] bg-auction-upcoming/10 blur-[140px] rounded-full pointer-events-none animate-float-slow" style={{ animationDelay: '2s' }} />
           <div className="absolute top-1/3 right-1/4 w-56 h-56 bg-auction-live/8 blur-[100px] rounded-full pointer-events-none animate-float" style={{ animationDelay: '0.8s' }} />
-
-          {/* ── New: drifting glass chips — ambient, non-interactive, hidden on small screens so they don't crowd content ── */}
-          <div className="hidden lg:block absolute inset-0 z-0">
-            {heroFloatChips.map((chip) => (
-              <div
-                key={chip.label}
-                className={`float-chip ${chip.className} ${chip.anim}`}
-                style={chip.delay ? { animationDelay: chip.delay } : undefined}
-              >
-                <chip.icon size={13} className="text-secondary-container shrink-0" />
-                <span className="italic font-display">{chip.label}</span>
-              </div>
-            ))}
-          </div>
 
           <div className="mx-auto max-w-container-max px-gutter py-16 lg:py-28 flex flex-col lg:flex-row items-center gap-14">
 
@@ -437,32 +431,32 @@ function App() {
             <div className="flex-1 space-y-7 text-center lg:text-left z-10">
               <div className="pill-badge animate-shimmer">
                 <Sparkles size={13} className="shrink-0" />
-                On-chain · Stellar Soroban · {networkConfig.label}
+                On-chain ledger · Stellar Soroban · {networkConfig.label}
               </div>
 
-              <h1 className="headline-italic text-headline-lg-mobile sm:text-headline-xl text-on-background dark:text-slate-50 leading-[1.05] font-normal">
+              <h1 className="headline-italic text-headline-lg-mobile sm:text-headline-xl text-on-background dark:text-stone-50 leading-[1.05] font-normal">
                 Bid on Projects.<br />
                 <span className="gradient-text">Settle On-Chain.</span>
               </h1>
 
-              <p className="text-body-lg text-on-surface-variant max-w-xl mx-auto lg:mx-0 dark:text-slate-400 leading-relaxed">
+              <p className="text-body-lg text-on-surface-variant max-w-xl mx-auto lg:mx-0 dark:text-stone-400 leading-relaxed">
                 List digital projects, collect XLM bids, and settle the winner trustlessly via Soroban smart contracts. No intermediaries — just your wallet.
               </p>
 
               <div className="flex gap-6 sm:gap-10 justify-center lg:justify-start pt-2">
                 <div className="text-center lg:text-left">
-                  <div className="text-headline-md font-black text-on-background dark:text-slate-100">{stats.total}</div>
-                  <div className="text-label-sm text-on-surface-variant uppercase tracking-wide dark:text-slate-500">Listings</div>
+                  <div className="text-headline-md font-black text-on-background dark:text-stone-100 font-mono">{stats.total}</div>
+                  <div className="text-label-sm text-on-surface-variant uppercase tracking-wide dark:text-stone-500">Listings</div>
                 </div>
-                <div className="w-px bg-outline-variant/60 dark:bg-slate-800" />
+                <div className="w-px bg-outline-variant/60 dark:bg-stone-800" />
                 <div className="text-center lg:text-left">
-                  <div className="text-headline-md font-black text-auction-live">{stats.live}</div>
-                  <div className="text-label-sm text-on-surface-variant uppercase tracking-wide dark:text-slate-500">Live Now</div>
+                  <div className="text-headline-md font-black text-auction-live font-mono">{stats.live}</div>
+                  <div className="text-label-sm text-on-surface-variant uppercase tracking-wide dark:text-stone-500">Live Now</div>
                 </div>
-                <div className="w-px bg-outline-variant/60 dark:bg-slate-800" />
+                <div className="w-px bg-outline-variant/60 dark:bg-stone-800" />
                 <div className="text-center lg:text-left">
-                  <div className="text-headline-md font-black gradient-text">{stats.totalBids}</div>
-                  <div className="text-label-sm text-on-surface-variant uppercase tracking-wide dark:text-slate-500">Active Bids</div>
+                  <div className="text-headline-md font-black gradient-text font-mono">{stats.totalBids}</div>
+                  <div className="text-label-sm text-on-surface-variant uppercase tracking-wide dark:text-stone-500">Active Bids</div>
                 </div>
               </div>
 
@@ -483,14 +477,11 @@ function App() {
               )}
             </div>
 
-            {/* Right: Manager Panel — neon-bordered glass console, with a small orbiting accent ring */}
+            {/* Right: Manager Panel — brass-bordered "lot ticket" console */}
             <div className="w-full max-w-[480px] z-10 relative">
-              {/* ── New: orbiting dashed ring behind the console, purely decorative ── */}
-              <div className="hidden xl:block absolute -top-10 -right-10 w-24 h-24 rounded-full border border-dashed border-secondary-container/30 animate-spin-slow pointer-events-none" />
-
               <div className="relative rounded-2xl neon-border">
-                <div className="relative bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl overflow-hidden dark:bg-slate-900 dark:border-slate-800 animate-glow-pulse">
-                  <div className="bg-primary px-6 py-4 flex items-center gap-3 dark:bg-slate-950 border-b border-white/5">
+                <div className="relative bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl overflow-hidden dark:bg-stone-900 dark:border-stone-800">
+                  <div className="bg-primary px-6 py-4 flex items-center gap-3 dark:bg-stone-950 border-b border-white/5">
                     <div className="w-9 h-9 bg-secondary-container/15 rounded-xl flex items-center justify-center">
                       <PlusCircle size={19} className="text-secondary-container" />
                     </div>
@@ -499,6 +490,8 @@ function App() {
                       <p className="text-on-primary-container text-label-sm opacity-70">Create an on-chain auction</p>
                     </div>
                   </div>
+                  {/* torn-ticket stub line — signature auction-lot detail */}
+                  <div className="ticket-perforation bg-primary dark:bg-stone-950" />
                   <div className="p-6">
                     <ManagerPanel
                       walletAddress={wallet.address}
@@ -548,8 +541,8 @@ function App() {
               <section>
                 <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <h2 className="headline-italic text-headline-md text-on-background dark:text-slate-100 font-normal">Project Board</h2>
-                    <p className="mt-0.5 text-body-sm text-on-surface-variant dark:text-slate-400">Live and recently ended auctions open for public bidding.</p>
+                    <h2 className="headline-italic text-headline-md text-on-background dark:text-stone-100 font-normal">Project Board</h2>
+                    <p className="mt-0.5 text-body-sm text-on-surface-variant dark:text-stone-400">Live and recently ended auctions open for public bidding.</p>
                   </div>
                   <button onClick={refreshAuctions} disabled={loading} className="btn-ghost stable-button self-start sm:self-auto">
                     <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
@@ -573,12 +566,12 @@ function App() {
 
                 <AnimatePresence mode="popLayout">
                   {filteredAndSortedAuctions.length === 0 ? (
-                    <div className="rounded-2xl border border-dashed border-outline-variant bg-surface-container-low px-6 py-14 text-center dark:bg-slate-900/20 dark:border-slate-800">
-                      <div className="w-14 h-14 rounded-full bg-surface-container dark:bg-slate-800 flex items-center justify-center mx-auto mb-4">
-                        <LayoutDashboard size={24} className="text-outline dark:text-slate-500" />
+                    <div className="rounded-2xl border border-dashed border-outline-variant bg-surface-container-low px-6 py-14 text-center dark:bg-stone-900/20 dark:border-stone-800">
+                      <div className="w-14 h-14 rounded-full bg-surface-container dark:bg-stone-800 flex items-center justify-center mx-auto mb-4">
+                        <LayoutDashboard size={24} className="text-outline dark:text-stone-500" />
                       </div>
-                      <p className="text-headline-sm font-semibold text-on-surface dark:text-slate-200">{hasActiveFilters ? 'No auctions match your filters' : 'No active auctions'}</p>
-                      <p className="mt-2 text-body-sm text-on-surface-variant dark:text-slate-400">
+                      <p className="text-headline-sm font-semibold text-on-surface dark:text-stone-200">{hasActiveFilters ? 'No auctions match your filters' : 'No active auctions'}</p>
+                      <p className="mt-2 text-body-sm text-on-surface-variant dark:text-stone-400">
                         {hasActiveFilters
                           ? 'Try resetting the filters or modifying your search terms.'
                           : contractReady
@@ -626,19 +619,9 @@ function App() {
         </AnimatePresence>
         </div>
 
-        {/* ══ WHY ON-CHAIN — bento trust grid with a small floating accent field ══ */}
-        <section className="py-section-padding bg-surface-container-low border-t border-outline-variant dark:bg-slate-900/10 dark:border-slate-800/80 relative overflow-hidden">
+        {/* ══ WHY ON-CHAIN — restrained bento trust grid ══ */}
+        <section className="py-section-padding bg-surface-container-low border-t border-outline-variant dark:bg-stone-900/10 dark:border-stone-800/80 relative overflow-hidden">
           <div className="absolute inset-0 hero-grid-bg opacity-40 pointer-events-none" />
-
-          {/* ── New: a couple of ambient floating chips for this section only ── */}
-          <div className="hidden lg:block absolute top-8 right-10 float-chip animate-drift-a" style={{ animationDelay: '0.4s' }}>
-            <ShieldCheck size={13} className="text-secondary-container shrink-0" />
-            <span className="italic font-display">No admin keys</span>
-          </div>
-          <div className="hidden lg:block absolute bottom-10 left-10 float-chip animate-drift-c" style={{ animationDelay: '1.4s' }}>
-            <Globe2 size={13} className="text-secondary-container shrink-0" />
-            <span className="italic font-display">Permissionless</span>
-          </div>
 
           <div className="mx-auto max-w-container-max px-gutter relative z-10">
             <div className="text-center mb-14">
@@ -646,24 +629,31 @@ function App() {
                 <Zap size={13} />
                 Why BidX
               </div>
-              <h2 className="headline-italic text-headline-lg text-on-background dark:text-slate-100 font-normal">Built for trustless bidding</h2>
-              <p className="mt-3 text-body-lg text-on-surface-variant max-w-2xl mx-auto dark:text-slate-400 font-medium">Powered by Stellar Soroban — transparent, trustless, permissionless.</p>
+              <h2 className="headline-italic text-headline-lg text-on-background dark:text-stone-100 font-normal">Built for trustless bidding</h2>
+              <p className="mt-3 text-body-lg text-on-surface-variant max-w-2xl mx-auto dark:text-stone-400 font-medium">Powered by Stellar Soroban — transparent, trustless, permissionless.</p>
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-label-sm font-mono uppercase tracking-wider text-on-surface-variant dark:text-stone-500">
+                <span>No admin keys</span>
+                <span className="text-outline-variant dark:text-stone-700">·</span>
+                <span>Permissionless</span>
+                <span className="text-outline-variant dark:text-stone-700">·</span>
+                <span>Settled on-chain</span>
+              </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {trustPoints.map(({ icon: Icon, title, body, accent }) => (
                 <div
                   key={title}
-                  className={`rounded-2xl p-8 text-center auction-card-hover border transition-all ${
+                  className={`rounded-2xl p-8 text-center auction-card-hover border-t-2 border transition-all ${
                     accent
-                      ? 'bg-primary text-on-primary border-transparent shadow-2xl md:-translate-y-3 dark:bg-slate-900/60 dark:border-slate-800'
-                      : 'bg-surface-container-lowest border-outline-variant dark:bg-slate-900 dark:border-slate-800'
+                      ? 'bg-primary text-on-primary border-t-secondary-container border-x-transparent border-b-transparent shadow-xl dark:bg-stone-900/60'
+                      : 'bg-surface-container-lowest border-t-outline-variant border-x-outline-variant/60 border-b-outline-variant/60 dark:bg-stone-900 dark:border-t-stone-700 dark:border-x-stone-800 dark:border-b-stone-800'
                   }`}
                 >
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5 ${accent ? 'bg-secondary-container/15' : 'bg-surface-container dark:bg-slate-800'}`}>
-                    <Icon size={24} className={accent ? 'text-secondary-container' : 'text-primary dark:text-slate-300'} />
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5 ${accent ? 'bg-secondary-container/15' : 'bg-surface-container dark:bg-stone-800'}`}>
+                    <Icon size={24} className={accent ? 'text-secondary-container' : 'text-primary dark:text-stone-300'} />
                   </div>
-                  <h3 className={`headline-italic font-normal text-headline-sm mb-3 ${accent ? 'text-on-primary' : 'text-on-background dark:text-slate-200'}`}>{title}</h3>
-                  <p className={`text-body-sm leading-relaxed ${accent ? 'text-on-primary-container' : 'text-on-surface-variant dark:text-slate-400'}`}>{body}</p>
+                  <h3 className={`headline-italic font-normal text-headline-sm mb-3 ${accent ? 'text-on-primary' : 'text-on-background dark:text-stone-200'}`}>{title}</h3>
+                  <p className={`text-body-sm leading-relaxed ${accent ? 'text-on-primary-container' : 'text-on-surface-variant dark:text-stone-400'}`}>{body}</p>
                 </div>
               ))}
             </div>
@@ -671,15 +661,9 @@ function App() {
         </section>
 
         {/* ══ CTA BANNER ══ */}
-        <section className="relative overflow-hidden bg-primary dark:bg-slate-950">
+        <section className="relative overflow-hidden bg-primary dark:bg-stone-950">
           <div className="absolute top-0 -left-16 w-72 h-72 bg-secondary-container/10 blur-[100px] rounded-full pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-80 h-80 bg-auction-upcoming/10 blur-[120px] rounded-full pointer-events-none" />
-
-          {/* ── New: one floating chip inside the CTA banner ── */}
-          <div className="hidden md:block absolute top-6 right-16 float-chip animate-drift-b" style={{ animationDelay: '0.9s' }}>
-            <Sparkles size={13} className="text-secondary-container shrink-0" />
-            <span className="italic font-display">One click away</span>
-          </div>
 
           <div className="mx-auto max-w-container-max px-gutter py-16 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
             <div>
@@ -699,7 +683,7 @@ function App() {
       </main>
 
       {/* ══ FOOTER ══ */}
-      <footer className="bg-primary border-t border-white/10 dark:bg-slate-950 dark:border-slate-900">
+      <footer className="bg-primary border-t border-white/10 dark:bg-stone-950 dark:border-stone-900">
         <div className="mx-auto max-w-container-max px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <Logo size={30} showText={true} textClassName="text-body-md headline-italic" />
