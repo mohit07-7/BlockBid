@@ -1,5 +1,6 @@
-/* ── New: intense uppercase display face + techy body font ────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* ── New: Clash Display (headlines) + JetBrains Mono (tags/labels) — professional web3 pairing ── */
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -24,25 +25,25 @@
 
 @layer components {
 
-  /* ── Primary CTA — neon red "Bid Now" button ────────────────────── */
+  /* ── Primary CTA — solid crimson, no neon overload ────────────────────── */
   .btn-primary {
-    @apply inline-flex items-center gap-2 rounded-full
+    @apply inline-flex items-center gap-2 rounded-lg
            bg-secondary-container text-on-secondary
-           px-6 py-3 text-label-lg font-bold
+           px-6 py-3 text-label-lg font-semibold
            transition-all duration-200 shadow-neon
-           hover:brightness-105 hover:shadow-neon-lg hover:-translate-y-0.5 active:scale-95
+           hover:brightness-110 hover:shadow-neon-lg hover:-translate-y-0.5 active:scale-[0.98]
            disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:translate-y-0;
   }
 
   /* ── Ghost / outline button ────────────────────────────────────────── */
   .btn-ghost {
-    @apply inline-flex items-center gap-2 rounded-full
+    @apply inline-flex items-center gap-2 rounded-lg
            border border-outline-variant bg-surface-container-lowest
-           px-4 py-3 text-body-sm font-semibold text-on-surface
+           px-4 py-3 text-body-sm font-medium text-on-surface
            transition-all duration-200
-           hover:bg-surface-container hover:border-secondary-container
+           hover:bg-surface-container hover:border-secondary-container/50
            disabled:cursor-not-allowed disabled:opacity-50
-           dark:bg-black dark:border-slate-800 dark:text-slate-300 dark:hover:border-secondary-container;
+           dark:bg-black dark:border-slate-800 dark:text-slate-300 dark:hover:border-secondary-container/50;
   }
 
   /* ── Stable height helper ──────────────────────────────────────────── */
@@ -57,17 +58,17 @@
   }
 
   .metric p {
-    @apply text-headline-lg font-black text-secondary-container;
+    @apply text-headline-lg font-display font-semibold text-on-background;
   }
 
   .metric span {
-    @apply mt-1 block text-label-lg font-semibold text-on-primary-container uppercase tracking-wider;
+    @apply mt-1 block font-mono text-label-sm font-medium text-on-surface-variant uppercase tracking-widest;
   }
 
   /* ── Auction status badge ──────────────────────────────────────────── */
   .status-badge {
-    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1
-           text-label-sm font-semibold uppercase tracking-wide;
+    @apply inline-flex items-center gap-1.5 rounded-md px-2.5 py-1
+           font-mono text-label-sm font-semibold uppercase tracking-wide;
   }
 
   .status-badge.live {
@@ -95,7 +96,7 @@
     @apply h-2.5 w-2.5 rounded-full flex-shrink-0;
   }
 
-  .status-dot.live    { @apply bg-auction-live shadow-[0_0_8px_rgba(255,0,51,0.6)]; }
+  .status-dot.live    { @apply bg-auction-live shadow-[0_0_8px_rgba(225,18,42,0.6)]; }
   .status-dot.ended   { @apply bg-outline; }
   .status-dot.settled { @apply bg-success-green; }
 
@@ -112,27 +113,27 @@
 
   /* ── New: glass panel used across the redesigned shell ───────────────── */
   .glass-panel {
-    @apply rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl;
   }
 
-  /* ── New: pill badge with dot ────────────────────────────────────────── */
+  /* ── New: pill badge with dot — mono font, technical feel ──────────────── */
   .pill-badge {
     @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full
-           text-label-sm uppercase tracking-wider font-bold
-           border border-secondary-container/30 bg-secondary-container/10 text-secondary-container;
+           font-mono text-label-sm uppercase tracking-wider font-semibold
+           border border-secondary-container/25 bg-secondary-container/[0.06] text-secondary-container;
   }
 
-  /* ── New: intense uppercase display headline — the signature type treatment ─────── */
+  /* ── New: display headline — sharp geometric sans, tight tracking, no shouting ─────── */
   .headline-italic {
-    @apply font-display uppercase tracking-tight;
+    @apply font-display font-semibold tracking-tight;
     font-style: normal;
   }
 
   /* ── New: floating glass chip — small drifting labels scattered around hero/sections ── */
   .float-chip {
     @apply pointer-events-none select-none absolute flex items-center gap-1.5
-           rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-md
-           px-3 py-1.5 text-label-sm font-bold text-on-primary shadow-chip;
+           rounded-lg border border-white/10 bg-white/[0.05] backdrop-blur-md
+           px-3 py-1.5 font-mono text-label-sm font-semibold text-on-primary shadow-chip;
   }
 
   .dark .float-chip {
@@ -158,7 +159,7 @@
 
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(1.5deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
 }
 
 @keyframes float-slow {
@@ -167,8 +168,8 @@
 }
 
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 12px rgba(255, 27, 61, 0.25); }
-  50% { box-shadow: 0 0 40px rgba(255, 27, 61, 0.5); }
+  0%, 100% { box-shadow: 0 0 10px rgba(225, 18, 42, 0.15); }
+  50% { box-shadow: 0 0 28px rgba(225, 18, 42, 0.3); }
 }
 
 @keyframes border-spin {
@@ -184,7 +185,7 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent 33%, rgba(255,27,61,0.14) 50%, transparent 66%);
+  background: linear-gradient(90deg, transparent 33%, rgba(225,18,42,0.10) 50%, transparent 66%);
   background-size: 200% 100%;
   animation: shimmer 2.5s ease-in-out infinite;
 }
@@ -201,32 +202,32 @@
   animation: glow-pulse 2.4s ease-in-out infinite;
 }
 
-/* ── Premium gradient text (blood-red gradient accent) ───────── */
+/* ── Restrained accent text — solid crimson, not a rainbow gradient ───────── */
 .gradient-text {
-  background: linear-gradient(135deg, #FFD1D1 0%, #FF1B3D 45%, #7A0014 100%);
+  background: linear-gradient(100deg, #FF4D5E 0%, #E1122A 60%, #8A0A1A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ── Hero section enhanced background: fine dot-grid + noise ──────────── */
+/* ── Hero section background: faint dot-grid, barely visible ──────────── */
 .hero-grid-bg {
   background-image:
-    radial-gradient(rgba(255,27,61,0.12) 1px, transparent 1px);
-  background-size: 28px 28px;
+    radial-gradient(rgba(225,18,42,0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 .dark .hero-grid-bg {
   background-image:
-    radial-gradient(rgba(255,27,61,0.16) 1px, transparent 1px);
+    radial-gradient(rgba(225,18,42,0.10) 1px, transparent 1px);
 }
 
-/* ── New: mesh gradient backdrop for the shell ─────────────────────────── */
+/* ── New: mesh gradient backdrop — mostly black, red used as a whisper ─────────────────────────── */
 .mesh-bg {
   background:
-    radial-gradient(ellipse 60% 50% at 15% 10%, rgba(255,27,61,0.14), transparent 60%),
-    radial-gradient(ellipse 50% 40% at 90% 20%, rgba(122,0,20,0.18), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(255,122,61,0.10), transparent 60%);
+    radial-gradient(ellipse 55% 45% at 15% 5%, rgba(225,18,42,0.10), transparent 60%),
+    radial-gradient(ellipse 45% 35% at 90% 15%, rgba(91,140,255,0.06), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 50% 100%, rgba(225,18,42,0.06), transparent 60%);
 }
 
 /* ── New: subtle rotating conic-gradient border for the manager console ── */
@@ -240,10 +241,10 @@
   inset: -1.5px;
   border-radius: inherit;
   padding: 1.5px;
-  background: conic-gradient(from 0deg, #FF1B3D, #3D0007, #FF7A3D, #FF1B3D);
+  background: conic-gradient(from 0deg, #E1122A, #2B0006, #5B8CFF, #E1122A);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: 0.6;
+  opacity: 0.4;
   pointer-events: none;
 }
