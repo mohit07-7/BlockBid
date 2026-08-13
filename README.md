@@ -139,11 +139,12 @@ The main contract never trusts an external service to issue refunds — the escr
 ## 📸 Platform Screenshots
 
 ### Light (Cream) Mode & Bidding Board
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4770482a-638d-4ae3-9e57-5848950185d4" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8a142237-8284-4121-a348-ba000d133a06" />
+
 
 
 ### Dark Mode & Manager Console
-![Uploading image.png…]()
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9ff10cc5-c106-4499-90ff-e42aa021851d" />
 
 
 ### Mobile Responsive View
