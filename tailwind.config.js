@@ -14,92 +14,91 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        // ── New: clean geometric display face for headlines — not shouty, just sharp ──
-        display: ['"Clash Display"', 'Inter', 'sans-serif'],
-        // ── New: monospace for tags/labels/addresses — technical web3 feel ──
-        mono: ['"JetBrains Mono"', 'monospace'],
+        // ── Sharp geometric display face for headlines — the "terminal" voice ──
+        display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+        // ── Monospace for addresses, hashes, ledger data — the "on-chain" voice ──
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       fontSize: {
-        'headline-xl':  ['54px', { lineHeight: '58px',  letterSpacing: '-0.03em', fontWeight: '600' }],
-        'headline-lg':  ['34px', { lineHeight: '40px',  letterSpacing: '-0.02em', fontWeight: '600' }],
-        'headline-md':  ['24px', { lineHeight: '30px',  fontWeight: '600' }],
-        'headline-sm':  ['19px', { lineHeight: '26px',  fontWeight: '600' }],
-        'headline-lg-mobile': ['32px', { lineHeight: '38px', fontWeight: '600' }],
-        'body-lg':  ['17px', { lineHeight: '27px', fontWeight: '400' }],
-        'body-md':  ['15px', { lineHeight: '23px', fontWeight: '400' }],
-        'body-sm':  ['13.5px', { lineHeight: '20px', fontWeight: '400' }],
-        'label-lg': ['13px', { lineHeight: '18px', fontWeight: '600' }],
-        'label-sm': ['10.5px', { lineHeight: '14px', fontWeight: '600' }],
+        'headline-xl':  ['64px', { lineHeight: '64px',  letterSpacing: '-0.03em', fontWeight: '700' }],
+        'headline-lg':  ['36px', { lineHeight: '42px',  letterSpacing: '-0.02em', fontWeight: '700' }],
+        'headline-md':  ['24px', { lineHeight: '30px',  fontWeight: '700' }],
+        'headline-sm':  ['19px', { lineHeight: '26px',  fontWeight: '700' }],
+        'headline-lg-mobile': ['34px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'body-lg':  ['18px', { lineHeight: '28px', fontWeight: '400' }],
+        'body-md':  ['16px', { lineHeight: '24px', fontWeight: '400' }],
+        'body-sm':  ['14px', { lineHeight: '20px', fontWeight: '400' }],
+        'label-lg': ['13px', { lineHeight: '18px', fontWeight: '700', letterSpacing: '0.02em' }],
+        'label-sm': ['11px', { lineHeight: '15px', fontWeight: '700', letterSpacing: '0.06em' }],
       },
       colors: {
-        // ── Void Black + Crimson — restrained, professional, one accent only ─────
-        primary:               '#060606',
-        'primary-container':   '#0F0F0F',
-        'on-primary':          '#F5F1F1',
-        'on-primary-container':'#A89A9A',
-        'primary-fixed':       '#1A0C0C',
-        'primary-fixed-dim':   '#0F0808',
-        'on-primary-fixed':    '#F5F1F1',
-        'on-primary-fixed-variant': '#4D2323',
-        'inverse-primary':     '#E1122A',
+        // ── Void + Signal — deep black terminal with cyan/magenta duotone circuitry ──
+        primary:               '#07060C',   // near-black void
+        'primary-container':   '#0F0D1A',   // elevated void surface
+        'on-primary':          '#EAF6FF',
+        'on-primary-container':'#7C8AB8',
+        'primary-fixed':       '#1B1830',
+        'primary-fixed-dim':   '#14111F',
+        'on-primary-fixed':    '#EAF6FF',
+        'on-primary-fixed-variant': '#4A4E75',
+        'inverse-primary':     '#C6B8F0',
 
-        secondary:                 '#3D0A11',
-        'secondary-container':     '#E1122A',   // single controlled crimson accent
-        'on-secondary':            '#FFFFFF',
-        'on-secondary-container':  '#FFD9DC',
-        'secondary-fixed':         '#FF6B78',
-        'secondary-fixed-dim':     '#E1122A',
-        'on-secondary-fixed':      '#2B0006',
-        'on-secondary-fixed-variant': '#7A0D18',
+        secondary:                 '#003842',   // deep signal teal
+        'secondary-container':     '#00F0FF',   // electric cyan accent (primary signal)
+        'on-secondary':            '#00181C',
+        'on-secondary-container':  '#00232A',
+        'secondary-fixed':         '#9FFBFF',
+        'secondary-fixed-dim':     '#4EF5FF',
+        'on-secondary-fixed':      '#00181C',
+        'on-secondary-fixed-variant': '#004650',
 
-        tertiary:                 '#141414',
-        'tertiary-container':     '#242424',
-        'on-tertiary':            '#F5F1F1',
-        'on-tertiary-container':  '#B8AEAE',
-        'tertiary-fixed':         '#2A2A2A',
-        'tertiary-fixed-dim':     '#1A1A1A',
-        'on-tertiary-fixed':      '#F5F1F1',
-        'on-tertiary-fixed-variant': '#3D3D3D',
+        tertiary:                 '#2B0035',
+        'tertiary-container':     '#FF2ED1',   // magenta second signal
+        'on-tertiary':            '#ffffff',
+        'on-tertiary-container':  '#FF9CF0',
+        'tertiary-fixed':         '#FFD6F7',
+        'tertiary-fixed-dim':     '#FF8CE8',
+        'on-tertiary-fixed':      '#3A0040',
+        'on-tertiary-fixed-variant': '#8A0090',
 
-        // ── Surfaces — true black hierarchy, no color cast ──────────────────────
-        background:                 '#060606',
-        'on-background':            '#F5F1F1',
-        surface:                    '#060606',
-        'on-surface':               '#F5F1F1',
-        'surface-variant':          '#1C1616',
-        'on-surface-variant':       '#9C9090',
-        'surface-bright':           '#0F0B0B',
-        'surface-dim':              '#040303',
-        'surface-container-lowest': '#000000',
-        'surface-container-low':    '#0C0A0A',
-        'surface-container':        '#121010',
-        'surface-container-high':   '#191515',
-        'surface-container-highest':'#211B1B',
-        'inverse-surface':          '#F5F1F1',
-        'inverse-on-surface':       '#121010',
-        'surface-tint':             '#E1122A',
+        // ── Surfaces — this product is dark-native, "background" IS the void ──
+        background:                 '#07060C',
+        'on-background':            '#EAF6FF',
+        surface:                    '#07060C',
+        'on-surface':               '#EAF6FF',
+        'surface-variant':          '#171426',
+        'on-surface-variant':       '#8B8FB8',
+        'surface-bright':           '#171426',
+        'surface-dim':              '#050409',
+        'surface-container-lowest': '#050409',
+        'surface-container-low':    '#0B0913',
+        'surface-container':        '#100D1C',
+        'surface-container-high':   '#171326',
+        'surface-container-highest':'#1F1A32',
+        'inverse-surface':          '#EAF6FF',
+        'inverse-on-surface':       '#100D1C',
+        'surface-tint':             '#00F0FF',
 
         // ── Utility ──────────────────────────────────────────────────────────────
-        outline:          '#4D4040',
-        'outline-variant':'#221C1C',
-        error:            '#FF3B3B',
-        'on-error':       '#ffffff',
-        'error-container':'#2B0A0A',
-        'on-error-container': '#FFB3B3',
+        outline:          '#3A3652',
+        'outline-variant':'#211D35',
+        error:            '#FF4D6A',
+        'on-error':       '#1A0006',
+        'error-container':'#2E0510',
+        'on-error-container': '#FF9CB3',
 
         // ── Brand-specific ────────────────────────────────────────────────────────
-        'auction-live':     '#E1122A',   // crimson – live badge
-        'auction-upcoming': '#5B8CFF',   // cool blue – deliberate contrast, not red-on-red
-        'gold-service':     '#E8B84B',   // amber premium
-        'success-green':    '#22C55E',   // settled/success
+        'auction-live':     '#FF2ED1',   // magenta – live pulse
+        'auction-upcoming': '#00F0FF',   // cyan – upcoming
+        'gold-service':     '#FFB800',   // amber premium
+        'success-green':    '#39FF88',   // settled/success signal
 
-        // ── Legacy aliases kept so old components don't break ────────────────────
         cream: {
-          50:  '#000000',
-          100: '#060606',
-          200: '#121010',
-          300: '#221C1C',
-          400: '#4D4040',
+          50:  '#EAF6FF',
+          100: '#171426',
+          200: '#100D1C',
+          300: '#211D35',
+          400: '#8B8FB8',
         },
       },
       maxWidth: {
@@ -123,28 +122,45 @@ export default {
         full: '9999px',
       },
       boxShadow: {
-        'card-hover': '0px 16px 40px rgba(0,0,0,0.6), 0px 0px 0px 1px rgba(225,18,42,0.08)',
-        'auction':    '0 2px 12px rgba(0,0,0,0.5)',
-        'neon':       '0 0 0 1px rgba(225,18,42,0.4), 0 4px 20px rgba(225,18,42,0.25)',
-        'neon-lg':    '0 0 0 1px rgba(225,18,42,0.5), 0 8px 32px rgba(225,18,42,0.35)',
-        'chip':       '0 8px 24px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04)',
+        'card-hover': '0px 16px 40px rgba(0, 240, 255, 0.10)',
+        'auction':    '0 2px 12px rgba(0, 0, 0, 0.4)',
+        'neon':       '0 0 0 1px rgba(0,240,255,0.5), 0 0 24px rgba(0,240,255,0.35)',
+        'neon-lg':    '0 0 0 1px rgba(0,240,255,0.6), 0 0 56px rgba(0,240,255,0.45)',
+        'chip':       '0 8px 24px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06)',
+        'magenta':    '0 0 0 1px rgba(255,46,209,0.45), 0 0 32px rgba(255,46,209,0.3)',
       },
       keyframes: {
         'drift-a': {
-          '0%, 100%': { transform: 'translate(0, 0) rotate(-2deg)' },
-          '50%':      { transform: 'translate(10px, -16px) rotate(1deg)' },
+          '0%, 100%': { transform: 'translate(0, 0) rotate(-4deg)' },
+          '50%':      { transform: 'translate(14px, -22px) rotate(3deg)' },
         },
         'drift-b': {
-          '0%, 100%': { transform: 'translate(0, 0) rotate(1deg)' },
-          '50%':      { transform: 'translate(-14px, 12px) rotate(-1deg)' },
+          '0%, 100%': { transform: 'translate(0, 0) rotate(3deg)' },
+          '50%':      { transform: 'translate(-18px, 16px) rotate(-2deg)' },
         },
         'drift-c': {
-          '0%, 100%': { transform: 'translate(0, 0) rotate(-1deg)' },
-          '50%':      { transform: 'translate(8px, 14px) rotate(2deg)' },
+          '0%, 100%': { transform: 'translate(0, 0) rotate(-2deg)' },
+          '50%':      { transform: 'translate(10px, 20px) rotate(4deg)' },
         },
         'spin-slow': {
           from: { transform: 'rotate(0deg)' },
           to:   { transform: 'rotate(360deg)' },
+        },
+        'pulse-line': {
+          '0%':   { strokeDashoffset: '400' },
+          '100%': { strokeDashoffset: '0' },
+        },
+        'scan': {
+          '0%':   { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
+        'flicker': {
+          '0%, 100%': { opacity: '1' },
+          '92%':      { opacity: '1' },
+          '93%':      { opacity: '0.4' },
+          '94%':      { opacity: '1' },
+          '96%':      { opacity: '0.6' },
+          '97%':      { opacity: '1' },
         },
       },
       animation: {
@@ -152,6 +168,9 @@ export default {
         'drift-b': 'drift-b 9s ease-in-out infinite',
         'drift-c': 'drift-c 8s ease-in-out infinite',
         'spin-slow': 'spin-slow 14s linear infinite',
+        'pulse-line': 'pulse-line 3.5s linear infinite',
+        'scan': 'scan 6s linear infinite',
+        'flicker': 'flicker 6s ease-in-out infinite',
       },
     },
   },
