@@ -1,5 +1,5 @@
-/* ── New: editorial italic serif for headlines/signatures ────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+/* ── New: intense uppercase display face + techy body font ────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +16,7 @@
 
   body {
     @apply bg-background text-on-surface font-sans antialiased
-           dark:bg-[#05030D] dark:text-slate-100;
+           dark:bg-black dark:text-slate-100;
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -24,7 +24,7 @@
 
 @layer components {
 
-  /* ── Primary CTA — neon lime "Bid Now" button ────────────────────── */
+  /* ── Primary CTA — neon red "Bid Now" button ────────────────────── */
   .btn-primary {
     @apply inline-flex items-center gap-2 rounded-full
            bg-secondary-container text-on-secondary
@@ -42,7 +42,7 @@
            transition-all duration-200
            hover:bg-surface-container hover:border-secondary-container
            disabled:cursor-not-allowed disabled:opacity-50
-           dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300 dark:hover:border-secondary-container;
+           dark:bg-black dark:border-slate-800 dark:text-slate-300 dark:hover:border-secondary-container;
   }
 
   /* ── Stable height helper ──────────────────────────────────────────── */
@@ -95,7 +95,7 @@
     @apply h-2.5 w-2.5 rounded-full flex-shrink-0;
   }
 
-  .status-dot.live    { @apply bg-auction-live shadow-[0_0_8px_rgba(255,61,127,0.6)]; }
+  .status-dot.live    { @apply bg-auction-live shadow-[0_0_8px_rgba(255,0,51,0.6)]; }
   .status-dot.ended   { @apply bg-outline; }
   .status-dot.settled { @apply bg-success-green; }
 
@@ -107,7 +107,7 @@
   /* ── Glass (legacy, keep for compatibility) ────────────────────────── */
   .glass {
     @apply rounded-xl border border-outline-variant bg-surface-container-lowest/80 backdrop-blur-sm
-           dark:bg-slate-900/80 dark:border-slate-800;
+           dark:bg-black/80 dark:border-slate-800;
   }
 
   /* ── New: glass panel used across the redesigned shell ───────────────── */
@@ -122,10 +122,10 @@
            border border-secondary-container/30 bg-secondary-container/10 text-secondary-container;
   }
 
-  /* ── New: italic display headline — the signature type treatment ─────── */
+  /* ── New: intense uppercase display headline — the signature type treatment ─────── */
   .headline-italic {
-    @apply font-display italic;
-    font-style: italic;
+    @apply font-display uppercase tracking-tight;
+    font-style: normal;
   }
 
   /* ── New: floating glass chip — small drifting labels scattered around hero/sections ── */
@@ -136,7 +136,7 @@
   }
 
   .dark .float-chip {
-    @apply bg-slate-900/60 border-slate-700/60;
+    @apply bg-black/60 border-slate-700/60;
   }
 }
 
@@ -167,8 +167,8 @@
 }
 
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 12px rgba(198, 255, 61, 0.18); }
-  50% { box-shadow: 0 0 36px rgba(198, 255, 61, 0.4); }
+  0%, 100% { box-shadow: 0 0 12px rgba(255, 27, 61, 0.25); }
+  50% { box-shadow: 0 0 40px rgba(255, 27, 61, 0.5); }
 }
 
 @keyframes border-spin {
@@ -184,7 +184,7 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent 33%, rgba(198,255,61,0.10) 50%, transparent 66%);
+  background: linear-gradient(90deg, transparent 33%, rgba(255,27,61,0.14) 50%, transparent 66%);
   background-size: 200% 100%;
   animation: shimmer 2.5s ease-in-out infinite;
 }
@@ -201,9 +201,9 @@
   animation: glow-pulse 2.4s ease-in-out infinite;
 }
 
-/* ── Premium gradient text (renamed, used for headline accents) ───────── */
+/* ── Premium gradient text (blood-red gradient accent) ───────── */
 .gradient-text {
-  background: linear-gradient(135deg, #E3FFA0 0%, #C6FF3D 45%, #7CC7FF 100%);
+  background: linear-gradient(135deg, #FFD1D1 0%, #FF1B3D 45%, #7A0014 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -212,21 +212,21 @@
 /* ── Hero section enhanced background: fine dot-grid + noise ──────────── */
 .hero-grid-bg {
   background-image:
-    radial-gradient(rgba(198,255,61,0.10) 1px, transparent 1px);
+    radial-gradient(rgba(255,27,61,0.12) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
 .dark .hero-grid-bg {
   background-image:
-    radial-gradient(rgba(198,255,61,0.14) 1px, transparent 1px);
+    radial-gradient(rgba(255,27,61,0.16) 1px, transparent 1px);
 }
 
 /* ── New: mesh gradient backdrop for the shell ─────────────────────────── */
 .mesh-bg {
   background:
-    radial-gradient(ellipse 60% 50% at 15% 10%, rgba(198,255,61,0.10), transparent 60%),
-    radial-gradient(ellipse 50% 40% at 90% 20%, rgba(91,140,255,0.12), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(255,61,127,0.08), transparent 60%);
+    radial-gradient(ellipse 60% 50% at 15% 10%, rgba(255,27,61,0.14), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 20%, rgba(122,0,20,0.18), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(255,122,61,0.10), transparent 60%);
 }
 
 /* ── New: subtle rotating conic-gradient border for the manager console ── */
@@ -240,10 +240,10 @@
   inset: -1.5px;
   border-radius: inherit;
   padding: 1.5px;
-  background: conic-gradient(from 0deg, #C6FF3D, #7CC7FF, #FF3D7F, #C6FF3D);
+  background: conic-gradient(from 0deg, #FF1B3D, #3D0007, #FF7A3D, #FF1B3D);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: 0.55;
+  opacity: 0.6;
   pointer-events: none;
 }
