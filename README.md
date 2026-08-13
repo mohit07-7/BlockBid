@@ -143,7 +143,8 @@ The main contract never trusts an external service to issue refunds — the escr
 
 
 ### Dark Mode & Manager Console
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/26f279d7-ac23-4ce7-936d-ebd0ecfb3eba" />
+![Uploading image.png…]()
+
 
 ### Mobile Responsive View
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/900a3237-fda8-4770-8f7b-9194e7522a0d" />
